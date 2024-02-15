@@ -57,10 +57,61 @@ fn check_cd(key: String) -> bool {
 }
 
 fn check_office(key: String) -> bool {
+    // check if the key has the right pattern
+    let pattern = Regex::new(r"^\d{4}-\d{7}$").unwrap();
+    if !pattern.is_match(&key) { 
+        return false;
+    }
+
+    let parts: Vec<&str> = key.split("-").collect();
+    // check if the first segment is correct
+    let f_segment: i32 = parts[0].trim().parse().unwrap();
+
+    let third_digit = (f_segment / 10) % 10;
+    let last_digit = f_segment % 10;
+    if third_digit == 9 && last_digit != 0 && last_digit != 1{
+        return false;
+    } else if last_digit != third_digit + 1 {
+        return false;
+    }
+
+    // check if this segment is divisible by 7 and if the last digit isnt => 8 or 0
+    let s_segment: i32 = parts[1].trim().parse().unwrap();
+    if digit_sum(s_segment) % 7 != 0 || s_segment % 10 >= 8 || s_segment % 10 == 0 {
+        return false;
+    }
+
     true
 }
 
 fn check_oem(key: String) -> bool {
+    let pattern = Regex::new(r"^\d{5}-OEM-\d{7}-\d{5}$").unwrap();
+    if !pattern.is_match(&key) { 
+        return false;
+    }
+
+    let parts: Vec<&str> = key.split("-").collect();
+    // check the day
+    let day = &parts[0][..3].parse().unwrap();
+    let days = 1..366;
+    if !days.contains(day) {
+        return false;
+    }
+    // check the year
+    let valid_years = [95, 96, 97, 98, 99, 00, 01, 02]; // 03 is techically a valid year but W95 doesn't accept it so I'm leaving it out
+    let year: &i32 = &parts[0][3..5].parse().unwrap();
+    if !valid_years.contains(year) {
+        return false;
+    }
+
+    let s_segment: i32 = parts[2].trim().parse().unwrap();
+    if parts[2].chars().next().unwrap() != '0' {
+        return false;
+    }
+
+    if digit_sum(s_segment) % 7 != 0 || s_segment % 10 >= 8 || s_segment % 10 == 0 {
+        return false;
+    }
     true
 }
 

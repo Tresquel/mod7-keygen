@@ -66,13 +66,9 @@ pub fn office() -> String {
 pub fn oem() -> String {
     let mut random = rand::thread_rng();
 
+    let valid_years = [95, 96, 97, 98, 99, 00, 01, 02];
     let day = random.gen_range(1..=366);
-    let mut year = 102 - random.gen_range(0..=7); // year 03 is invalid for W95
-    if year >= 100 {
-        let mut year_str = year.to_string();
-        year_str.remove(0); // remove first digit
-        year = year_str.parse().unwrap();
-    }
+    let mut year = valid_years[random.gen_range(0..valid_years.len())]; // year 03 is invalid for W95
 
     let f_segment = format!("{:0>3}{:0>2}", day, year);
 
