@@ -22,7 +22,7 @@ pub fn cd() -> String {
 
     // loop forever until we find a valid second segment thingy
     loop {
-        s_segment = random.gen_range(7..9999997);
+        s_segment = random.gen_range(7..=9999997);
         if digit_sum(s_segment) % 7 != 0 || s_segment % 10 >= 8 {
             continue;
         } else {
@@ -36,7 +36,7 @@ pub fn cd() -> String {
 pub fn office() -> String {
     let mut random = rand::thread_rng();
 
-    let mut f_segment = random.gen_range(1..999); // 1112
+    let mut f_segment = random.gen_range(1..=999); // 1112
     let mut last_digit = f_segment % 10;
     if last_digit == 9 {
         // 9 + 1 = 10 so just wrap it down to 0
@@ -52,7 +52,7 @@ pub fn office() -> String {
 
     // loop forever until we find a valid second segment thingy
     loop {
-        s_segment = random.gen_range(7..9999997);
+        s_segment = random.gen_range(7..=9999997);
         if digit_sum(s_segment) % 7 != 0 || s_segment % 10 >= 8 {
             continue;
         } else {
@@ -61,6 +61,36 @@ pub fn office() -> String {
     }
 
     format!("{:0>4}-{:0>7}", f_segment, s_segment)
+}
+
+pub fn oem() -> String {
+    let mut random = rand::thread_rng();
+
+    let day = random.gen_range(1..=366);
+    let mut year = 102 - random.gen_range(0..=7); // year 03 is invalid for W95
+    if year >= 100 {
+        let mut year_str = year.to_string();
+        year_str.remove(0); // remove first digit
+        year = year_str.parse().unwrap();
+    }
+
+    let f_segment = format!("{:0>3}{:0>2}", day, year);
+
+    let mut s_segment: i32; // 1111111
+
+    // loop forever until we find a valid second segment thingy
+    loop {
+        s_segment = random.gen_range(7..=999997);
+        if digit_sum(s_segment) % 7 != 0 || s_segment % 10 >= 8 {
+            continue;
+        } else {
+            break;
+        }
+    }
+
+    let t_segment = random.gen_range(0..=99999);
+
+    format!("{}-OEM-{:0>7}-{:0>5}", f_segment, s_segment, t_segment)
 }
 
 fn digit_sum(mut n: i32) -> i32 {

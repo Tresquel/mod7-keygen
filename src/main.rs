@@ -8,11 +8,13 @@ fn help() {
     Generates a CD key
 -office 
     Generates a Office key
-    
+-oem
+    Generates a OEM key
+
 optional arguments:
 amount <integer>
     For example: `-cd 15` will generate 15 CD keys
-    "
+"
     );
 }
 
@@ -44,6 +46,16 @@ fn main() {
 
                     return;
                 }
+
+                "-oem" => {
+                    println!("Generated OEM key(s): ");
+                    for _ in 0..amount {
+                        println!("{}", generator::oem());
+                    }
+
+                    return;
+                }
+
                 "-help" => {
                     help();
                     return;
