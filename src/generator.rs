@@ -23,7 +23,7 @@ pub fn cd() -> String {
     // loop forever until we find a valid second segment thingy
     loop {
         s_segment = random.gen_range(7..=9999997);
-        if digit_sum(s_segment) % 7 != 0 || s_segment % 10 >= 8 {
+        if digit_sum(s_segment) % 7 != 0 || s_segment % 10 >= 8 || s_segment % 10 == 0 {
             continue;
         } else {
             break;
@@ -53,7 +53,7 @@ pub fn office() -> String {
     // loop forever until we find a valid second segment thingy
     loop {
         s_segment = random.gen_range(7..=9999997);
-        if digit_sum(s_segment) % 7 != 0 || s_segment % 10 >= 8 {
+        if digit_sum(s_segment) % 7 != 0 || s_segment % 10 >= 8 || s_segment % 10 == 0 {
             continue;
         } else {
             break;
@@ -81,7 +81,7 @@ pub fn oem() -> String {
     // loop forever until we find a valid second segment thingy
     loop {
         s_segment = random.gen_range(7..=999997);
-        if digit_sum(s_segment) % 7 != 0 || s_segment % 10 >= 8 {
+        if digit_sum(s_segment) % 7 != 0 || s_segment % 10 >= 8 || s_segment % 10 == 0 {
             continue;
         } else {
             break;

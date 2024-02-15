@@ -7,3 +7,6 @@ I used [this blog post](https://gurney.dev/posts/mod7/) to figure out how these 
 # Usage
 `mod7-keygen {-cd | -office | -oem} <integer>`
 - The integer is optional, it specifies the amount of keys to generate.
+
+`mod7-keygen --check <string>`
+- Checks if the provided key is valid.

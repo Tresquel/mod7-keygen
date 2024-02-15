@@ -1,5 +1,7 @@
 use std::env;
+
 mod generator;
+mod validator;
 
 fn help() {
     println!(
@@ -10,6 +12,8 @@ fn help() {
     Generates a Office key
 -oem
     Generates a OEM key
+--check <string>
+    Checks if the provided key is valid
 
 optional arguments:
 amount <integer>
@@ -54,6 +58,23 @@ fn main() {
                     }
 
                     return;
+                }
+
+                "--check" => {
+                    if args.len() < 3 {
+                        eprintln!("Not enough arguments!");
+                        help();
+                        return;
+                    }
+                    
+                    let key = &args[2];
+                    let key_type = validator::check(key.to_string()); 
+                    if key_type != "" {
+                        println!("{} is a valid {} key.", key, key_type)
+                    } else {
+                        println!("{} is a invalid key.", key)
+                    }
+
                 }
 
                 "-help" => {
