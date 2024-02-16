@@ -10,3 +10,8 @@ I used [this blog post](https://gurney.dev/posts/mod7/) to figure out how these 
 
 `mod7-keygen --check <string>`
 - Checks if the provided key is valid.
+
+# Building
+Make sure you have Rust and Git installed
+- `git clone https://github.com/Tresquel/mod7-keygen.git`
+- `cd mod7-keygen && cargo build --release`
