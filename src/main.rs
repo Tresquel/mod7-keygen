@@ -33,7 +33,7 @@ fn main() {
             }
 
             match args[1].to_lowercase().as_str() {
-                "-cd" => {
+                "--cd" | "-c" => {
                     println!("Generated CD key(s): ");
                     for _ in 0..amount {
                         println!("{}", generator::cd());
@@ -42,7 +42,7 @@ fn main() {
                     return;
                 }
 
-                "-office" => {
+                "--office" | "-e" => {
                     println!("Generated Office key(s): ");
                     for _ in 0..amount {
                         println!("{}", generator::office());
@@ -51,7 +51,7 @@ fn main() {
                     return;
                 }
 
-                "-oem" => {
+                "--oem" | "-o" => {
                     println!("Generated OEM key(s): ");
                     for _ in 0..amount {
                         println!("{}", generator::oem());
@@ -77,10 +77,16 @@ fn main() {
 
                 }
 
-                "-help" => {
+                "--help" | "-h" => {
                     help();
                     return;
                 }
+
+                "--version" | "-v" => {
+                    println!("mod7-keygen version 1.1.0");
+                    return;
+                }
+
                 _ => {
                     eprintln!("Invalid argument(s)!");
                     help();
@@ -92,6 +98,7 @@ fn main() {
         _ => {
             eprintln!("Invalid argument(s)!");
             help();
+            return;
         }
     }
 }
