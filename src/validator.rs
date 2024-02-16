@@ -103,7 +103,7 @@ fn check_oem(key: String) -> bool {
     if !valid_years.contains(year) {
         return false;
     }
-
+    // check if the first digit is a 0
     let s_segment: i32 = parts[2].trim().parse().unwrap();
     if parts[2].chars().next().unwrap() != '0' {
         return false;
@@ -112,6 +112,8 @@ fn check_oem(key: String) -> bool {
     if digit_sum(s_segment) % 7 != 0 || s_segment % 10 >= 8 || s_segment % 10 == 0 {
         return false;
     }
+
+    // we don't need to check the last part because its already the right length
     true
 }
 
