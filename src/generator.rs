@@ -97,3 +97,26 @@ fn digit_sum(mut n: i32) -> i32 {
     }
     sum
 }
+
+#[cfg(test)]
+mod tests {
+    use crate::{generator::{cd, oem, office}, validator::{check_cd, check_oem, check_office}};
+
+    #[test]
+    fn test_cd_key_generation() {
+        let key = cd();
+        assert!(check_cd(key))
+    }
+
+    #[test]
+    fn test_office_key_generation() {
+        let key = office();
+        assert!(check_office(key))
+    }
+
+    #[test]
+    fn test_oem_key_generation() {
+        let key = oem();
+        assert!(check_oem(key))
+    }
+}

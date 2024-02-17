@@ -32,7 +32,7 @@ pub fn check(key: String) -> String {
     String::new()
 }
 
-fn check_cd(key: String) -> bool {
+pub fn check_cd(key: String) -> bool {
     // check if the key has the right pattern
     let pattern = Regex::new(r"^\d{3}-\d{7}$").unwrap();
     if !pattern.is_match(&key) { 
@@ -56,7 +56,7 @@ fn check_cd(key: String) -> bool {
     true
 }
 
-fn check_office(key: String) -> bool {
+pub fn check_office(key: String) -> bool {
     // check if the key has the right pattern
     let pattern = Regex::new(r"^\d{4}-\d{7}$").unwrap();
     if !pattern.is_match(&key) { 
@@ -84,7 +84,7 @@ fn check_office(key: String) -> bool {
     true
 }
 
-fn check_oem(key: String) -> bool {
+pub fn check_oem(key: String) -> bool {
     let pattern = Regex::new(r"^\d{5}-OEM-\d{7}-\d{5}$").unwrap();
     if !pattern.is_match(&key) { 
         return false;
@@ -124,4 +124,25 @@ fn digit_sum(mut n: i32) -> i32 {
         n /= 10;
     }
     sum
+}
+
+
+#[cfg(test)]
+mod tests {
+    use crate::validator::{check_cd, check_oem, check_office};
+
+    #[test]
+    fn test_cd_key() {
+        assert!(check_cd("111-1111111".to_string()))
+    }
+
+    #[test]
+    fn test_office_key() {
+        assert!(check_office("1112-1111111".to_string()))
+    }
+
+    #[test]
+    fn test_oem_key() {
+        assert!(check_oem("00100-OEM-0000007-00000".to_string()))
+    }
 }
