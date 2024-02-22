@@ -83,7 +83,7 @@ fn main() {
                 }
 
                 "--version" | "-v" => {
-                    println!("mod7-keygen version 1.1.0");
+                    println!("mod7-keygen version {}", env!("CARGO_PKG_VERSION"));
                     return;
                 }
 
