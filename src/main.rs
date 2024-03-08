@@ -6,11 +6,11 @@ mod validator;
 fn help() {
     println!(
         "usage:
--cd
+--cd | -c
     Generates a CD key
--office 
+--office | -e 
     Generates a Office key
--oem
+--oem | -o
     Generates a OEM key
 --check <string>
     Checks if the provided key is valid
